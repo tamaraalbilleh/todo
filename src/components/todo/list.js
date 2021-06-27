@@ -8,12 +8,7 @@ const [flag , setFlag ] = useState(false);
 const [id , setId] = useState ('');
 
 
-const deleteH = e =>{
-  e.preventDefault();
-  let id = e.target.value;
-  props.deleteHandle (id)
-  console.log (deleteH())
-}
+
 
  const toggle = (id) =>{
     setFlag (!flag);
