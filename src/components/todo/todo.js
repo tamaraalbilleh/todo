@@ -3,7 +3,7 @@ import TodoForm from './form.js';
 import TodoList from './list.js';
 import {useState} from 'react';
 import {useEffect} from 'react';
-
+import {Badge } from 'react-bootstrap'
 import './todo.scss';
 
 
@@ -64,12 +64,13 @@ const [list , setList] = useState([])
      
       }
     
+      document.title = `Tasks left : ${list.filter((item) => !item.complete).length}`;
 
     return (
       <>
         <header>
           <h2>
-          There are {list.filter(item => !item.complete).length} Items To Complete
+          There are <Badge variant="secondary">{list.filter(item => !item.complete).length} </Badge> Items To Complete
           </h2>
         </header>
 
