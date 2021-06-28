@@ -55,7 +55,7 @@ function TodoForm(props) {
         </Form.Label>
         </Form.Group>
 
-        <Button variant="secondary">Add Item</Button >
+        <Button variant="secondary" type='submit'>Add Item</Button >
       </Form>
     </>
   );
