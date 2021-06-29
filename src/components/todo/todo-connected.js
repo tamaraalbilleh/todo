@@ -11,8 +11,7 @@ import './todo.scss';
 const ToDo = () => {
 
   
-  const [list,_getTodoItems  , _toggleComplete , _addItem , deleteH]= useAjax();
- 
+  const [list,_getTodoItems  , _toggleComplete , _addItem , deleteH , editor]= useAjax();
   useEffect (_getTodoItems , [_getTodoItems]);
   document.title = `Tasks left : ${list.filter((item) => !item.complete).length}`;
 
@@ -37,6 +36,7 @@ const ToDo = () => {
             list={list}
             handleComplete={_toggleComplete}
             deleteH = {deleteH}
+            editor={editor}
           />
         </div>
       </section>

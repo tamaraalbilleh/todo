@@ -44,7 +44,7 @@ const [id , setId] = useState ('');
         
         </Toast.Header>
          
-          {/* <Button variant="outline-secondary" onClick={()=>toggle(item._id)} value={item._id}>Edit</Button>{' '} */}
+          <Button variant="outline-secondary" onClick={()=>toggle(item._id)} value={item._id} style={{'float' : 'right' , 'margin-right' : '30px'}}>Edit</Button>{' '}
           
 
           <Toast.Body onClick={() => props.handleComplete(item._id)}  style={{  minHeight: '80px' , 'width' : '100%' ,'text-align' : 'left' }}  >

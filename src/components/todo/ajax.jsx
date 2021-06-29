@@ -86,8 +86,38 @@ const useAjax = () => {
     
       }
 
+      const editor = (text , id)=>{
+        let item = list.filter ((item)=> item._id === id)[0] || {}
 
-    return [list,_getTodoItems , _toggleComplete,_addItem ,deleteH];
+        if (item) {
+          item.text = text;
+          list.map (itm =>{
+            if (itm._id === id ){
+              return item 
+            }else {
+              return itm
+            }
+          })
+        const url2 = `${todoAPI}/${item._id}`
+        const fetch = async ()=>{
+          axios.put (url2,item ,{
+              headers: { 'Content-Type': 'application/json' },
+              cache:'no-cache',
+              mode: 'cors',
+              body: JSON.stringify(item)
+                
+              }).then (response =>setList ( list.map(listItem => listItem._id === item._id ? response.data : listItem)))
+              .catch(console.error);
+          
+      }
+      fetch ();
+
+        }
+       
+      }
+
+
+    return [list,_getTodoItems , _toggleComplete,_addItem ,deleteH , editor];
 
 }
 
