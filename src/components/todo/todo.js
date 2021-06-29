@@ -32,11 +32,11 @@ const [list , setList] = useState([])
 
   useEffect(()=> {
     let list3 = [
-      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' ,duedate : '2021-06-27'},
-      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A', duedate : '2021-06-27'},
-      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B', duedate : '2021-06-27'},
-      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C' ,duedate : '2021-06-27'},
-      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B' , duedate : '2021-06-27'},
+      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' ,due : '2021-06-27'},
+      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A', due : '2021-06-27'},
+      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B', due : '2021-06-27'},
+      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C' ,due : '2021-06-27'},
+      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B' , due : '2021-06-27'},
     ];
 
     setList(list3);
@@ -77,7 +77,7 @@ const [list , setList] = useState([])
         <section className="todo">
 
           <div>
-            <TodoForm handleSubmit={addItem} />
+            <TodoForm    handleSubmit={addItem} />
           </div>
 
           <div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import If from './if'
 import  { Button } from 'react-bootstrap';
-import {ListGroup , Form} from  'react-bootstrap'
+import { Form , Badge ,Toast} from  'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 function TodoList(props) {
 
@@ -27,27 +27,35 @@ const [id , setId] = useState ('');
   return (
 
     <>
-    <ListGroup>
+    
       {props.list.map(item => (
       
-        <ListGroup.Item action variant={item.complete ? 'dark' : 'light'}
-    
-  
-          className={`complete-${item.complete.toString()}`}
-          key={item._id}
-        >
 
-          <Button variant="outline-danger" onClick={() => props.deleteH(item._id)} value={item._id}>Delete</Button>
-          <Button variant="outline-secondary" onClick={()=>toggle(item._id)} value={item._id}>Edit</Button>{' '}
+        <Toast 
+         className={`complete-${item.complete.toString()}`}
+          key={item._id}
+          onClose={() => props.deleteH(item._id)} value={item._id}
+          style={{'text-align': 'center' , 'width' : '100%' , 'margin-left' : '250px' , 'display' : 'block' }}
+        >
+        <Toast.Header  style={{ }}>
+        <Badge pill variant={item.complete ? 'danger' : 'success'} > {item.complete ? 'completed' : 'pending'} </Badge>{' '}
+        <strong className="mr-auto" style={{'margin-left': '20px' }}>{item.assignee}</strong>
+        
+        
+        </Toast.Header>
+         
+          {/* <Button variant="outline-secondary" onClick={()=>toggle(item._id)} value={item._id}>Edit</Button>{' '} */}
           
 
-
-          <span onClick={() => props.handleComplete(item._id)}>
-            {item.text}  : {item.assignee} ,  difficulty : {item.difficulty} , due : {item.duedate}
-          </span>
-          </ListGroup.Item>
+          <Toast.Body onClick={() => props.handleComplete(item._id)}  style={{  minHeight: '80px' , 'width' : '100%' ,'text-align' : 'left' }}  >
+          <p>{item.text}</p>
+          
+           <small className='float-right'>difficulty : {item.difficulty}</small> 
+           </Toast.Body>
+          
+          </Toast>
       ))}
-      </ListGroup>
+      
 
     <If condition={flag}>
       <Form onSubmit= {editor}>
