@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useState , useEffect } from 'react';
+import { useState } from 'react';
 import If from './if'
 import  { Button } from 'react-bootstrap';
 import { Form , Badge ,Toast } from  'react-bootstrap'
@@ -13,9 +13,8 @@ function TodoList(props) {
 
 const [flag , setFlag ] = useState(false);
 const [id , setId] = useState ('');
-const [list, setList] = useState([]);
 
-let list2 = props.list
+let list = props.list
 
 const context = useContext(SettingsContext)
 
@@ -24,14 +23,13 @@ const maxItems = context.itemPerPage;
 const [currentPage, setCurrentPage] = useState(1);
 
 if (context.finished){
-  list2 = list.filter((task) => !task.finished);
+  list = list.filter((task) => !task.finished);
 }
-  const numOfPages =list2.length / maxItems + 1;
+  const numOfPages =list.length / maxItems + 1;
   const last = currentPage * context.itemPerPage;
   const first = last - context.itemPerPage;
-  const currentTasks = list2.slice(first, last);
-  setList({list : currentTasks});
-  context.setTaskSum(list2.length);
+  const currentTasks = list.slice(first, last);
+  context.setTaskSum(list.length);
   let active = currentPage;
   let items = [];
   for (let number = 1; number <= numOfPages; number++) {
@@ -50,18 +48,15 @@ if (context.finished){
    props.editor (newUpdate , id)
  }
  if (context.finished) {
-   list.filter((item) => !item.complete);
-   setList(props.list);
-  }
-  useEffect(() => {
-    setList(props.list);
-   }, [props.list]);
-   
+  list = list.filter((item) => !item.complete);
+}
+  
   return (
 
     <>
     
-      {list.map(item => (
+      {currentTasks
+      .map(item => (
       
 
         <Toast 
