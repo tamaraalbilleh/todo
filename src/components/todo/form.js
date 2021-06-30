@@ -3,6 +3,9 @@ import React from 'react';
 import  { Button } from 'react-bootstrap';
 import {Form} from  'react-bootstrap'
 import useForm from './useForm';
+
+import ContentSetting from './settings.jsx'
+
 function TodoForm(props) {
 
 
@@ -57,6 +60,7 @@ function TodoForm(props) {
         <Button variant="info"  style={{'width': '50%' , 'text-align' : 'center'  , }} type='submit'>Add Item</Button >
       </Form>
       </section>
+      <ContentSetting />
     </>
   );
   
