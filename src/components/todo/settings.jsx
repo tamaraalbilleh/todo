@@ -1,6 +1,6 @@
 import React , {useContext} from 'react';
 import {SettingsContext} from './setting-context';
-import {Button , DropdownButton ,Dropdown , Form} from 'react-bootstrap';
+import {Button  , Form} from 'react-bootstrap';
 const ContentSetting = (props) =>{
     const context   = useContext (SettingsContext)
     const itemPerPageHandler = e =>{
@@ -16,7 +16,7 @@ const ContentSetting = (props) =>{
         <React.Fragment>
             <h2>Settings</h2>
             <Form>
-                <Button variant="info"  style={{'width': '50%' , 'text-align' : 'center'  , }} onClick={context.toggle} >{context.finished? 'show all Tasks': 'hide Completed Tasks'}</Button >
+                <Button variant="info"  style={{'width': '100%' , 'text-align' : 'center'  , }} onClick={context.toggle} >{context.finished? 'show all Tasks': 'hide Completed Tasks'}</Button >
                 <Form.Label name="Sort By"> Sort Tasks By : 
                 <select name="Sort By" title="Sort By" onChange={sortByHandler}>
                     <option value="difficulty" >difficulty</option>

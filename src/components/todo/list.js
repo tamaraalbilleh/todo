@@ -5,21 +5,23 @@ import  { Button } from 'react-bootstrap';
 import { Form , Badge ,Toast } from  'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SettingsContext } from './setting-context';
-import {  Pagination } from  'react-bootstrap'
+import {  Pagination } from  'react-bootstrap';
 
 
 function TodoList(props) {
-
   const [flag , setFlag ] = useState(false);
   const [id , setId] = useState ('');
   let list = props.list
   const context = useContext(SettingsContext)
   const maxItems = context.itemPerPage;
   const [currentPage, setCurrentPage] = useState(1);
+
   if (context.finished){
-    list = list.filter((task) => !task.finished);
+    list = list.filter((task) => !task.complete);
   }
-  const numOfPages =list.length / maxItems + 1;
+
+  
+  let numOfPages =list.length / maxItems + 1;
   const last = currentPage * context.itemPerPage;
   const first = last - context.itemPerPage;
   if (context.sortType === 'descending'){
@@ -81,12 +83,12 @@ function TodoList(props) {
     }
   }
   let currentTasks = list.slice(first, last);
+  numOfPages =currentTasks.length / maxItems + 1;
   context.setTaskSum(list.length);
-  let active = currentPage;
-  let items = [];
-  for (let number = 1; number <= numOfPages; number++) {
-    items.push(<Pagination.Item key={number} active={number === active}> {number} </Pagination.Item>);
-  }
+
+
+
+
  const toggle = (id) =>{
     setFlag (!flag);
     setId (id)
@@ -97,8 +99,13 @@ function TodoList(props) {
    let newUpdate = e.target.text.value
    props.editor (newUpdate , id)
  }
- if (context.finished) {
-  currentTasks = list.filter((item) => !item.complete);
+
+
+ 
+ let active = currentPage;
+ let items = [];
+ for (let number = 1; number <= numOfPages; number++) {
+   items.push(<Pagination.Item key={number} active={number === active}> {number} </Pagination.Item>);
  }
  return (
     <>
@@ -116,11 +123,6 @@ function TodoList(props) {
           </Toast.Body>
         </Toast>
       ))}
-      <Pagination size="sm" >
-        <Pagination.Prev size="sm" disabled={active === 1 ? true : false} onClick={() => { setCurrentPage(currentPage - 1); }} />
-          {items}
-        <Pagination.Next  size="sm" disabled={active > numOfPages - 1 ? true : false} onClick={() => {setCurrentPage(currentPage + 1); }} />
-      </Pagination>
       <If condition={flag}>
         <Form onSubmit= {editor}>
           <Form.Label>
@@ -130,7 +132,13 @@ function TodoList(props) {
           <Button variant="outline-secondary" type='submit' >Submit Edit</Button>
         </Form>
       </If>
+      <Pagination size="sm" >
+        <Pagination.Prev size="sm" disabled={active === 1 ? true : false} onClick={() => { setCurrentPage(currentPage - 1); }} />
+          {items}
+        <Pagination.Next  size="sm" disabled={active > numOfPages - 1 ? true : false} onClick={() => {setCurrentPage(currentPage + 1); }} />
+      </Pagination>
     </>
+    
   );
 }
 

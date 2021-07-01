@@ -27,15 +27,11 @@ function TodoForm(props) {
       <Form.Group controlId="formBasicEmail">
         <Form.Label>
         <span>To Do Item</span>
-        <Form.Control
-          name="text"
-          placeholder="Add To Do List Item"
-            onChange={handleInputChange}
-          />
+        <Form.Control name="text" placeholder="Add To Do List Item" onChange={handleInputChange} />
         </Form.Label>
         </Form.Group>
 
-          <Form.Group controlId="formBasicRange">
+        <Form.Group controlId="formBasicRange">
         <Form.Label>
         <span>Difficulty Rating</span>
         <Form.Control variant="info" defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange}  style={{'color': 'blue' }} />
