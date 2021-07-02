@@ -83,7 +83,7 @@ function TodoList(props) {
     }
   }
   let currentTasks = list.slice(first, last);
-  numOfPages =props.list.length / maxItems + 1;
+  numOfPages =list.length / maxItems ;
   context.setTaskSum(list.length);
 
 
