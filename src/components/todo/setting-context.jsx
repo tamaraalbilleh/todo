@@ -8,7 +8,8 @@ const SettingsProvider = (props) =>{
     const [taskSum, setTaskSum] = useState(0);
     const [finished , setFinished] = useState (true);
     const [sortBy , setSortBy] = useState ('');
-    const [sortType , setSortType]  =useState('ascending')
+    const [sortType , setSortType]  =useState('ascending');
+    
     function toggle () {
         setFinished (finished=> !finished)
     }

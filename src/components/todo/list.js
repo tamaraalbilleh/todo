@@ -83,7 +83,7 @@ function TodoList(props) {
     }
   }
   let currentTasks = list.slice(first, last);
-  numOfPages =currentTasks.length / maxItems + 1;
+  numOfPages =list.length / maxItems ;
   context.setTaskSum(list.length);
 
 
@@ -108,28 +108,28 @@ function TodoList(props) {
    items.push(<Pagination.Item key={number} active={number === active}> {number} </Pagination.Item>);
  }
  return (
-    <>
+    <React.Fragment>
       {currentTasks
       .map(item => (
-        <Toast className={`complete-${item.complete.toString()}`} key={item._id} onClose={() => props.deleteH(item._id)} value={item._id} style={{'text-align': 'center' , 'width' : '100%' , 'margin-left' : '250px' , 'display' : 'block' }} >
+        <Toast className={`complete-${item.complete.toString()}`} key={item._id} onClose={() => props.deleteH(item._id)} value={item._id} style={{'text-align': 'center' , 'width' : '50%' , 'margin-left' : '150px' , 'display' : 'block' }} >
           <Toast.Header  style={{ }}>
             <Badge pill variant={item.complete ? 'danger' : 'success'} > {item.complete ? 'completed' : 'pending'} </Badge>{' '}
             <strong className="mr-auto" style={{'margin-left': '20px' }}>{item.assignee}</strong>
           </Toast.Header>
-          <Button variant="outline-secondary" onClick={()=>toggle(item._id)} value={item._id} style={{'float' : 'right' , 'margin-right' : '30px'}}>Edit</Button>{' '}
+          <Button variant="outline-secondary" onClick={()=>toggle(item._id)} value={item._id} style={{'float' : 'right' , 'margin-right' : '20px'}}>Edit</Button>{' '}
           <Toast.Body onClick={() => props.handleComplete(item._id)}  style={{  minHeight: '80px' , 'width' : '100%' ,'text-align' : 'left' }}  >
             <p>{item.text}</p>
-            <small className='float-right'>difficulty : {item.difficulty}</small> 
+            <small className='float-right' style={{  'margin-top' : '-20px' }} >difficulty : {item.difficulty}</small> 
           </Toast.Body>
         </Toast>
       ))}
       <If condition={flag}>
         <Form onSubmit= {editor}>
           <Form.Label>
-          <span>Edit Task</span>
-          <Form.Control type="text" name="text"   />
+          <span  style={{  'width' : '30%'  ,'margin-left' : '180px' }}>Edit Task</span>
+          <Form.Control type="text" name="text"  style={{  minHeight: '80px' , 'width' : '30%' ,'margin-left' : '180px'  }} />
           </Form.Label>
-          <Button variant="outline-secondary" type='submit' >Submit Edit</Button>
+          <Button variant="outline-secondary" type='submit' style={{  'width' : '30%'  ,'margin-left' : '180px' }} >Submit Edit</Button>
         </Form>
       </If>
       <Pagination size="sm" >
@@ -137,7 +137,7 @@ function TodoList(props) {
           {items}
         <Pagination.Next  size="sm" disabled={active > numOfPages - 1 ? true : false} onClick={() => {setCurrentPage(currentPage + 1); }} />
       </Pagination>
-    </>
+    </React.Fragment>
     
   );
 }
