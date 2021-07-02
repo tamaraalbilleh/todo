@@ -28,7 +28,7 @@ const ToDo = () => {
           <ContentSetting />
         </div>
         <div>
-          <TodoList list={list} handleComplete={_toggleComplete} deleteH = {deleteH} editor={editor} />
+          <TodoList list={list} handleComplete={_toggleComplete} deleteH = {deleteH} editor={editor} style={{  'width' : '30%'   }} />
         </div>
       </section>
     </>
