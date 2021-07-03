@@ -32,7 +32,7 @@ const logOutHandler =e =>{
         </aside>
         </If>
         <If condition={context.loggedIn}>
-        <Button variant="danger" onClick={logOutHandler}>Log Out</Button>
+        <Button variant="danger" style={{'margin-left': '400px' }} onClick={logOutHandler}>Log Out</Button>
         </If>
        
     </>

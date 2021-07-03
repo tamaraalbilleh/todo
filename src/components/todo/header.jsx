@@ -14,7 +14,9 @@ function Header(props) {
             <Navbar bg="primary" variant="dark" style={{'padding': '20px' }} >
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <SignIn />
+                    <div style={{'margin-left': '650px' }}>
+                        <SignIn  />
+                    </div>
                     <If condition={!context.loggedIn}>
                         <Nav.Link href="/signup" onClick={context.handleShow}>Register</Nav.Link>
                         <Switch>

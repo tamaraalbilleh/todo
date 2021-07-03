@@ -14,7 +14,7 @@ function TodoList(props) {
   const [id , setId] = useState ('');
   let list = props.list
   const context = useContext(SettingsContext);
-  const authContext = useContext (AuthContext)
+  const authContext = useContext (AuthContext);
   const maxItems = context.itemPerPage;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -109,7 +109,7 @@ function TodoList(props) {
  for (let number = 1; number <= numOfPages; number++) {
    items.push(<Pagination.Item key={number} active={number === active}> {number} </Pagination.Item>);
  }
- console.log ('this is the props',authContext)
+
  return (
     <React.Fragment>
       {currentTasks
@@ -125,7 +125,7 @@ function TodoList(props) {
           </Acl>
           <Toast.Body onClick={() =>authContext.user.capabilities.includes('update')? props.handleComplete(item._id) : false}  style={{  minHeight: '80px' , 'width' : '100%' ,'text-align' : 'left' }}  >
             <p>{item.text}</p>
-            <small className='float-right' style={{  'margin-top' : '-20px' }} >difficulty : {item.difficulty}</small> 
+            <small className='float-right' style={{  'margin-top' : '-5px' }} >difficulty : {item.difficulty}</small> 
           </Toast.Body>
         </Toast>
       ))}

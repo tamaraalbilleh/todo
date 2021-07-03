@@ -12,7 +12,6 @@ export default function App () {
         <If condition={context.loggedIn}>
           <ToDo />
         </If>
-        
       </>
     );
   
