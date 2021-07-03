@@ -10,9 +10,7 @@ export default function App () {
       <>
         <Header/>
         <If condition={context.loggedIn}>
-        
           <ToDo />
-         
         </If>
         
       </>
