@@ -6,13 +6,15 @@ import { Form , Badge ,Toast } from  'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SettingsContext } from './setting-context';
 import {  Pagination } from  'react-bootstrap';
-
+import Acl from './acl.jsx'
+import { AuthContext } from './auth-context';
 
 function TodoList(props) {
   const [flag , setFlag ] = useState(false);
   const [id , setId] = useState ('');
   let list = props.list
-  const context = useContext(SettingsContext)
+  const context = useContext(SettingsContext);
+  const authContext = useContext (AuthContext)
   const maxItems = context.itemPerPage;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -107,17 +109,21 @@ function TodoList(props) {
  for (let number = 1; number <= numOfPages; number++) {
    items.push(<Pagination.Item key={number} active={number === active}> {number} </Pagination.Item>);
  }
+ console.log ('this is the props',authContext)
  return (
     <React.Fragment>
       {currentTasks
       .map(item => (
-        <Toast className={`complete-${item.complete.toString()}`} key={item._id} onClose={() => props.deleteH(item._id)} value={item._id} style={{'text-align': 'center' , 'width' : '50%' , 'margin-left' : '150px' , 'display' : 'block' }} >
+
+        <Toast className={`complete-${item.complete.toString()}`} key={item._id} onClose={() =>authContext.user.capabilities.includes('delete')? props.deleteH(item._id) : false} value={item._id} style={{'text-align': 'center' , 'width' : '50%' , 'margin-left' : '150px' , 'display' : 'block' }} >
           <Toast.Header  style={{ }}>
             <Badge pill variant={item.complete ? 'danger' : 'success'} > {item.complete ? 'completed' : 'pending'} </Badge>{' '}
             <strong className="mr-auto" style={{'margin-left': '20px' }}>{item.assignee}</strong>
           </Toast.Header>
+          <Acl capability="update">
           <Button variant="outline-secondary" onClick={()=>toggle(item._id)} value={item._id} style={{'float' : 'right' , 'margin-right' : '20px'}}>Edit</Button>{' '}
-          <Toast.Body onClick={() => props.handleComplete(item._id)}  style={{  minHeight: '80px' , 'width' : '100%' ,'text-align' : 'left' }}  >
+          </Acl>
+          <Toast.Body onClick={() =>authContext.user.capabilities.includes('update')? props.handleComplete(item._id) : false}  style={{  minHeight: '80px' , 'width' : '100%' ,'text-align' : 'left' }}  >
             <p>{item.text}</p>
             <small className='float-right' style={{  'margin-top' : '-20px' }} >difficulty : {item.difficulty}</small> 
           </Toast.Body>
